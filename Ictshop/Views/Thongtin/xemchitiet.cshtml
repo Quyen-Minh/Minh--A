@@ -1,0 +1,25 @@
+﻿@using Ictshop.Models
+@model Post
+
+
+@{
+    ViewBag.Title = "xemchitiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<img class="img-responsive" src="~/HinhanhSP/ban1.jpg" />
+<div>
+    <h1 style="font-size:30px;font-family:Arial; color:black"> @Model.Title</h1>
+    <h3 style="font-size:25px;font-family:Arial;"> @Model.ShortDescription</h3>
+    <img src="@Url.Content("~/HinhanhSP/" +@Model.Anh)" width="100%" height="700" />
+    <br />
+    <p style="font-size:20px;">@Model.PostContent</p>
+    <br />
+    <h2>BÀI VIẾT LIÊN QUAN</h2>
+    <a href="#"><h3 style="color:black;">Cách thay đổi âm thanh thông báo trên Messenger với điện thoại Android nhanh chóng, đơn giản</h3></a>
+    <a href="#"><h3 style="color:black;">Cài Dynamic Island của iPhone 14 Pro trên máy Android siêu dễ bạn biết chưa?</h3></a>
+    <br/>
+    
+    <input type="submit" value="Thích"/>
+    <input type="submit" value="Chia sẻ"/>
+</div>

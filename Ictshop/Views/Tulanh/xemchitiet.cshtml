@@ -1,0 +1,352 @@
+﻿@using Ictshop.Models
+@model Sanpham
+
+
+@{
+    ViewBag.Title = "xemchitiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<style>
+    .left3 img {
+        height: 500px;
+        width: 500px;
+    }
+
+    input {
+        padding: 10px 20px;
+        background-color: aliceblue;
+        color: red;
+        border: 1px solid red;
+        font-size: 20px
+    }
+
+    .left3 {
+        width: 40%;
+        padding-top: 50px;
+        float: left;
+    }
+
+    .right3 {
+        width: 60%;
+        margin-left: 600px;
+        padding-top: 10px;
+    }
+
+        .right3 img {
+            width: 550px;
+        }
+
+    .card {
+        background-color: #F8F8F8;
+        padding: 84px;
+        border-radius: 23px;
+    }
+
+    .title {
+        font-size: 34px;
+        font-family: Merriweather;
+        flex-grow: 1;
+    }
+
+    .average-rating {
+        font-size: 26px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    .average-rating-section {
+        font-weight: 500;
+        font-size: 14px;
+        padding: 17px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 7px 20px 0 rgba(115, 116, 156, .08);
+        text-align: center;
+        min-width: 150px;
+    }
+
+    .star-icon {
+        width: 25px;
+        height: 25px;
+    }
+
+    .average-rating-section .star-icon {
+        width: 46px;
+        height: 46px;
+    }
+
+    .star-icon .icon-path {
+        fill: #FFD66C;
+        stroke: #EFB153;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        margin-bottom: 56px;
+    }
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+        margin-bottom: 32px;
+    }
+
+    .search-input-icon {
+        position: absolute;
+        height: 48px;
+        padding: 16px;
+        pointer-events: none;
+    }
+
+    .search-input {
+        padding: 16px;
+        border-radius: 26px;
+        background-color: white;
+        font-weight: 500;
+        font-size: inherit;
+        padding-left: calc(10px + 16px + 16px);
+        border: none;
+        width: 100%;
+    }
+
+    .review-rows {
+        display: grid;
+        grid-template-columns: auto auto 1fr auto;
+        align-items: center;
+        column-gap: 8px;
+        row-gap: 18px;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 16px;
+    }
+
+    .review-section {
+        margin-bottom: 56px;
+    }
+
+    .review-number {
+        font-weight: bold;
+        text-align: end;
+        justify-self: flex-end;
+    }
+
+    .review-bar {
+        --border-width: 1px;
+        position: relative;
+        flex-grow: 1;
+        background-color: #EEEEEE;
+        border: 1px solid #C9C9C9;
+        height: 10px;
+        border-radius: 100px;
+    }
+
+        .review-bar::after {
+            content: "";
+            position: absolute;
+            top: calc(-1 * var(--border-width));
+            bottom: calc(-1 * var(--border-width));
+            left: calc(-1 * var(--border-width));
+            right: calc(-1 * var(--border-width));
+            width: calc(2 * var(--border-width) + var(--width));
+            border: 1px solid #EFB153;
+            background-color: #FFD66C;
+            border-radius: 100px;
+        }
+
+        .review-bar.empty::after {
+            content: none;
+        }
+
+    .review-row:last-child {
+        margin-bottom: 0;
+    }
+
+    .review-btn {
+        background-color: hsl(238, 49%, 19%);
+        color: white;
+        border-radius: 100px;
+        padding: 16px 24px;
+        font-size: inherit;
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        outline-color: hsl(238, 49%, 79%);
+    }
+
+        .review-btn:hover {
+            background-color: hsl(238, 49%, 29%);
+        }
+</style>
+<br />
+<div>
+    <img class="img-responsive" src="~/HinhanhSP/ban1.jpg" />
+</div>
+<div class="left3">
+    <img src="@Url.Content("~/HinhanhSP/" +@Model.Anhbia)" width="400" height="400" />
+</div>
+<div class="right3">
+    <br />
+    <h3> @Model.Tensp</h3>
+    <img src="~/HinhanhSP/chitiet.PNG" />
+    <br />
+    <h3 style="color:red">Giá: @Model.Giatien</h3>
+    <br />
+    <table style="width:100%;font-size:20px">
+        <tr>
+            <td style="color: chocolate">Mã Giảm Giá<br />Của Shop</td>
+            <td style="padding-left:20px;color:red"><p style="border: 1px solid red;width:100px">Giảm 50%</p></td>
+        </tr>
+        <tr style="width:300px">
+            <td style="color:chocolate">Bảo Hiểm</td>
+            <td style="padding-left: 20px">Bảo vệ thiết bị nâng cao<p><a href="https://insurance.shopee.vn/ec/ec-pdp.html?from=pdp&product_id=1650882748039999001">Tìm hiểu thêm</a></p></td>
+        </tr>
+    </table>
+    <table style="width:100%;font-size:20px">
+        <tr>
+            <td style="color: chocolate">Màu sắc</td>
+            <td style="color:black">
+                <p style="border: 1px solid #dbcdcd;width:80px;text-align:center">Đỏ</p>
+            </td>
+            <td style="color:black">
+                <p style="border: 1px solid #dbcdcd; width: 80px; text-align: center">Xanh</p>
+            </td>
+            <td style="color:black">
+                <p style="border: 1px solid #dbcdcd; width: 80px; text-align: center">Trắng</p>
+            </td>
+        </tr>
+    </table>
+    <br />
+    @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMasp = Model.Masp, @strURL = Request.Url.ToString() }))
+    {
+        <input type="submit" value="Thêm vào giỏ hàng" id="bgnGioHang" />
+
+    }
+    <h2>Thông tin sản phẩm</h2>
+    <p>@Model.Mota</p>
+</div>
+<div>
+    <h2>Đánh giá sản phẩm</h2>
+    <div class="card">
+        <div class="header">
+            <span class="title">
+                What others think about the product
+            </span>
+            <div class="average-rating-section">
+                <div class="average-rating">
+                    <svg class="star-icon" viewBox="0 0 43 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="icon-path" d="M21.1363 1.42392C21.2826 1.11848 21.7174 1.11848 21.8637 1.42392L27.2274 12.6267C27.4958 13.1871 28.0288 13.5743 28.6447 13.6564L40.9566 15.2958C41.2923 15.3405 41.4267 15.754 41.1814 15.9875L32.1845 24.5506C31.7344 24.979 31.5308 25.6056 31.6431 26.2167L33.8885 38.4326C33.9497 38.7657 33.5979 39.0213 33.3001 38.8602L22.3759 32.9497C21.8294 32.654 21.1706 32.654 20.6241 32.9497L9.6999 38.8602C9.40205 39.0213 9.05025 38.7657 9.11147 38.4326L11.3569 26.2167C11.4692 25.6056 11.2656 24.979 10.8155 24.5506L1.81861 15.9875C1.57331 15.754 1.70768 15.3405 2.04336 15.2958L14.3553 13.6564C14.9712 13.5743 15.5042 13.1871 15.7726 12.6267L21.1363 1.42392Z" stroke-width="1.4375" />
+                    </svg>
+                    <div data-average-review></div>
+                </div>
+                Average customer rating
+            </div>
+        </div>
+        <div class="search-bar">
+            <svg class="search-input-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.6667 19.8333C16.177 19.8333 19.8333 16.177 19.8333 11.6667C19.8333 7.15634 16.177 3.5 11.6667 3.5C7.15634 3.5 3.5 7.15634 3.5 11.6667C3.5 16.177 7.15634 19.8333 11.6667 19.8333Z" stroke="#73749C" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M24.5 24.5L17.5 17.5" stroke="#73749C" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <input type="search" class="search-input" placeholder="Search topics and reviews">
+        </div>
+        <div class="review-section">
+            <div class="review-title">Reviews</div>
+            <div class="review-rows"></div>
+        </div>
+        <button class="review-btn">Write a review</button>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        const reviewRowsContainer = document.querySelector(".review-rows")
+        const averageReviewElem = document.querySelector("[data-average-review]")
+        const starIcon = `<svg class="star-icon" viewBox="0 0 43 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path class="icon-path" d="M21.1363 1.42392C21.2826 1.11848 21.7174 1.11848 21.8637 1.42392L27.2274 12.6267C27.4958 13.1871 28.0288 13.5743 28.6447 13.6564L40.9566 15.2958C41.2923 15.3405 41.4267 15.754 41.1814 15.9875L32.1845 24.5506C31.7344 24.979 31.5308 25.6056 31.6431 26.2167L33.8885 38.4326C33.9497 38.7657 33.5979 39.0213 33.3001 38.8602L22.3759 32.9497C21.8294 32.654 21.1706 32.654 20.6241 32.9497L9.6999 38.8602C9.40205 39.0213 9.05025 38.7657 9.11147 38.4326L11.3569 26.2167C11.4692 25.6056 11.2656 24.979 10.8155 24.5506L1.81861 15.9875C1.57331 15.754 1.70768 15.3405 2.04336 15.2958L14.3553 13.6564C14.9712 13.5743 15.5042 13.1871 15.7726 12.6267L21.1363 1.42392Z" stroke-width="1.4375" />
+</svg>`
+
+        const REVIEWS = {
+            5: 120,
+            4: 40,
+            3: 20,
+            2: 0,
+            1: 0,
+        }
+
+        const totalReviews = Object.values(REVIEWS).reduce((sum, value) => {
+            return sum + value
+        }, 0)
+        const averageReview =
+            Object.entries(REVIEWS).reduce((sum, [value, quantity]) => {
+                return sum + value * quantity
+            }, 0) / totalReviews
+
+        averageReviewElem.dataset.endValue = Math.round(averageReview * 10) / 10
+        averageReviewElem.textContent = 0
+
+        Object.entries(REVIEWS)
+            .sort(([a], [b]) => b - a)
+            .forEach(([value, quantity]) => {
+                const reviewNumber = document.createElement("div")
+                reviewNumber.textContent = value
+                reviewNumber.classList.add("review-number")
+                reviewRowsContainer.append(reviewNumber)
+                const starIconWrapper = document.createElement("div")
+                starIconWrapper.innerHTML = starIcon
+                reviewRowsContainer.append(starIconWrapper)
+                const reviewBar = document.createElement("div")
+                reviewBar.dataset.endValue = (quantity / totalReviews) * 100
+                reviewBar.classList.add("review-bar")
+                reviewBar.classList.toggle("empty", quantity === 0)
+                reviewRowsContainer.append(reviewBar)
+                const reviewCount = document.createElement("div")
+                reviewCount.dataset.endValue = quantity
+                reviewCount.textContent = 0
+                reviewCount.classList.add("review-count")
+                reviewRowsContainer.append(reviewCount)
+            })
+
+        let timeOffset
+        const DURATION = 500
+        function update(time) {
+            if (timeOffset != null) {
+                const timeElapsed = time - timeOffset
+                const newAverage = getNewValue(
+                    averageReviewElem.dataset.endValue,
+                    timeElapsed
+                )
+                averageReviewElem.textContent = Math.round(newAverage * 10) / 10
+                const countElems = document.querySelectorAll(
+                    ".review-count[data-end-value]"
+                )
+                countElems.forEach(elem => {
+                    elem.textContent = Math.round(
+                        getNewValue(elem.dataset.endValue, timeElapsed)
+                    )
+                })
+                const reviewBars = document.querySelectorAll(".review-bar[data-end-value]")
+                reviewBars.forEach(elem => {
+                    elem.style.setProperty(
+                        "--width",
+                        `${getNewValue(elem.dataset.endValue, timeElapsed)}%`
+                    )
+                })
+                if (timeElapsed >= DURATION) return
+                requestAnimationFrame(update)
+            } else {
+                timeOffset = time
+                requestAnimationFrame(update)
+            }
+        }
+
+        function getNewValue(endValue, timeElapsed) {
+            return Math.min((endValue * timeElapsed) / DURATION, endValue)
+        }
+
+        requestAnimationFrame(update)
+    </script>
+}

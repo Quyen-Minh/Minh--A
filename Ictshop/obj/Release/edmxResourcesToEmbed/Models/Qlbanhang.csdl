@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLdienthoaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Chitietdonhang">
+    <Key>
+      <PropertyRef Name="Madon" />
+      <PropertyRef Name="Masp" />
+    </Key>
+    <Property Name="Madon" Type="Int32" Nullable="false" />
+    <Property Name="Masp" Type="Int32" Nullable="false" />
+    <Property Name="Soluong" Type="Int32" />
+    <Property Name="Dongia" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Donhang" Relationship="Self.FK_Chitietdonhang_Donhang" FromRole="Chitietdonhang" ToRole="Donhang" />
+    <NavigationProperty Name="Sanpham" Relationship="QLdienthoaiModel.FK_Chitietdonhang_Sanpham" FromRole="Chitietdonhang" ToRole="Sanpham" />
+  </EntityType>
+  <EntityType Name="Donhang">
+    <Key>
+      <PropertyRef Name="Madon" />
+    </Key>
+    <Property Name="Madon" Type="Int32" Nullable="false" />
+    <Property Name="Ngaydat" Type="DateTime" Precision="3" />
+    <Property Name="Tinhtrang" Type="Int32" />
+    <Property Name="MaNguoidung" Type="Int32" />
+    <NavigationProperty Name="Chitietdonhangs" Relationship="Self.FK_Chitietdonhang_Donhang" FromRole="Donhang" ToRole="Chitietdonhang" />
+    <NavigationProperty Name="Nguoidung" Relationship="Self.FK_Donhang_Khachhang" FromRole="Donhang" ToRole="Nguoidung" />
+  </EntityType>
+  <EntityType Name="Hangsanxuat">
+    <Key>
+      <PropertyRef Name="Mahang" />
+    </Key>
+    <Property Name="Mahang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tenhang" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Sanphams" Relationship="QLdienthoaiModel.FK_Sanpham_Hangsanxuat" FromRole="Hangsanxuat" ToRole="Sanpham" />
+  </EntityType>
+  <EntityType Name="Hedieuhanh">
+    <Key>
+      <PropertyRef Name="Mahdh" />
+    </Key>
+    <Property Name="Mahdh" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tenhdh" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Sanphams" Relationship="QLdienthoaiModel.FK_Sanpham_Hedieuhanh" FromRole="Hedieuhanh" ToRole="Sanpham" />
+  </EntityType>
+  <EntityType Name="Nguoidung">
+    <Key>
+      <PropertyRef Name="MaNguoiDung" />
+    </Key>
+    <Property Name="MaNguoiDung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Dienthoai" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Matkhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IDQuyen" Type="Int32" />
+    <NavigationProperty Name="Donhangs" Relationship="Self.FK_Donhang_Khachhang" FromRole="Nguoidung" ToRole="Donhang" />
+    <NavigationProperty Name="PhanQuyen" Relationship="Self.FK_Nguoidung_Nguoidung" FromRole="Nguoidung" ToRole="PhanQuyen" />
+    <Property Name="Diachi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PhanQuyen">
+    <Key>
+      <PropertyRef Name="IDQuyen" />
+    </Key>
+    <Property Name="IDQuyen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenQuyen" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Nguoidungs" Relationship="Self.FK_Nguoidung_Nguoidung" FromRole="PhanQuyen" ToRole="Nguoidung" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Chitietdonhang_Donhang">
+    <End Role="Donhang" Type="Self.Donhang" Multiplicity="1" />
+    <End Role="Chitietdonhang" Type="Self.Chitietdonhang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Donhang">
+        <PropertyRef Name="Madon" />
+      </Principal>
+      <Dependent Role="Chitietdonhang">
+        <PropertyRef Name="Madon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Donhang_Khachhang">
+    <End Role="Nguoidung" Type="Self.Nguoidung" Multiplicity="0..1" />
+    <End Role="Donhang" Type="Self.Donhang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Nguoidung">
+        <PropertyRef Name="MaNguoiDung" />
+      </Principal>
+      <Dependent Role="Donhang">
+        <PropertyRef Name="MaNguoidung" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Nguoidung_Nguoidung">
+    <End Role="PhanQuyen" Type="Self.PhanQuyen" Multiplicity="0..1" />
+    <End Role="Nguoidung" Type="Self.Nguoidung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhanQuyen">
+        <PropertyRef Name="IDQuyen" />
+      </Principal>
+      <Dependent Role="Nguoidung">
+        <PropertyRef Name="IDQuyen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Qlbanhang" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Chitietdonhangs" EntityType="Self.Chitietdonhang" />
+    <EntitySet Name="Donhangs" EntityType="Self.Donhang" />
+    <EntitySet Name="Hangsanxuats" EntityType="Self.Hangsanxuat" />
+    <EntitySet Name="Hedieuhanhs" EntityType="Self.Hedieuhanh" />
+    <EntitySet Name="Nguoidungs" EntityType="Self.Nguoidung" />
+    <EntitySet Name="PhanQuyens" EntityType="Self.PhanQuyen" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Chitietdonhang_Donhang" Association="Self.FK_Chitietdonhang_Donhang">
+      <End Role="Donhang" EntitySet="Donhangs" />
+      <End Role="Chitietdonhang" EntitySet="Chitietdonhangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Donhang_Khachhang" Association="Self.FK_Donhang_Khachhang">
+      <End Role="Nguoidung" EntitySet="Nguoidungs" />
+      <End Role="Donhang" EntitySet="Donhangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Nguoidung_Nguoidung" Association="Self.FK_Nguoidung_Nguoidung">
+      <End Role="PhanQuyen" EntitySet="PhanQuyens" />
+      <End Role="Nguoidung" EntitySet="Nguoidungs" />
+    </AssociationSet>
+    <EntitySet Name="Sanphams" EntityType="QLdienthoaiModel.Sanpham" />
+    <AssociationSet Name="FK_Chitietdonhang_Sanpham" Association="QLdienthoaiModel.FK_Chitietdonhang_Sanpham">
+      <End Role="Sanpham" EntitySet="Sanphams" />
+      <End Role="Chitietdonhang" EntitySet="Chitietdonhangs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sanpham_Hangsanxuat" Association="QLdienthoaiModel.FK_Sanpham_Hangsanxuat">
+      <End Role="Hangsanxuat" EntitySet="Hangsanxuats" />
+      <End Role="Sanpham" EntitySet="Sanphams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sanpham_Hedieuhanh" Association="QLdienthoaiModel.FK_Sanpham_Hedieuhanh">
+      <End Role="Hedieuhanh" EntitySet="Hedieuhanhs" />
+      <End Role="Sanpham" EntitySet="Sanphams" />
+    </AssociationSet>
+    <EntitySet Name="Categories" EntityType="QLdienthoaiModel.Category" />
+    <EntitySet Name="PostTagMaps" EntityType="QLdienthoaiModel.PostTagMap" />
+    <EntitySet Name="Tags" EntityType="QLdienthoaiModel.Tag" />
+    <AssociationSet Name="FK__PostTagMa__TagId__20E1DCB5" Association="QLdienthoaiModel.FK__PostTagMa__TagId__20E1DCB5">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="PostTagMap" EntitySet="PostTagMaps" />
+    </AssociationSet>
+    <EntitySet Name="Posts" EntityType="QLdienthoaiModel.Post" />
+    <AssociationSet Name="FK__Post__CategoryId__1B29035F" Association="QLdienthoaiModel.FK__Post__CategoryId__1B29035F">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Post" EntitySet="Posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PostTagMa__PostI__1FEDB87C" Association="QLdienthoaiModel.FK__PostTagMa__PostI__1FEDB87C">
+      <End Role="Post" EntitySet="Posts" />
+      <End Role="PostTagMap" EntitySet="PostTagMaps" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Sanpham">
+    <Key>
+      <PropertyRef Name="Masp" />
+    </Key>
+    <Property Name="Masp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tensp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Giatien" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Soluong" Type="Int32" />
+    <Property Name="Mota" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Thesim" Type="Int32" />
+    <Property Name="Bonhotrong" Type="Int32" />
+    <Property Name="Sanphammoi" Type="Boolean" />
+    <Property Name="Ram" Type="Int32" />
+    <Property Name="Anhbia" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Mahang" Type="Int32" />
+    <Property Name="Mahdh" Type="Int32" />
+    <Property Name="Kichco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Chatluong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" />
+    <NavigationProperty Name="Chitietdonhangs" Relationship="QLdienthoaiModel.FK_Chitietdonhang_Sanpham" FromRole="Sanpham" ToRole="Chitietdonhang" />
+    <NavigationProperty Name="Hangsanxuat" Relationship="QLdienthoaiModel.FK_Sanpham_Hangsanxuat" FromRole="Sanpham" ToRole="Hangsanxuat" />
+    <NavigationProperty Name="Hedieuhanh" Relationship="QLdienthoaiModel.FK_Sanpham_Hedieuhanh" FromRole="Sanpham" ToRole="Hedieuhanh" />
+  </EntityType>
+  <Association Name="FK_Chitietdonhang_Sanpham">
+    <End Type="QLdienthoaiModel.Sanpham" Role="Sanpham" Multiplicity="1" />
+    <End Type="QLdienthoaiModel.Chitietdonhang" Role="Chitietdonhang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sanpham">
+        <PropertyRef Name="Masp" />
+      </Principal>
+      <Dependent Role="Chitietdonhang">
+        <PropertyRef Name="Masp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sanpham_Hangsanxuat">
+    <End Type="QLdienthoaiModel.Hangsanxuat" Role="Hangsanxuat" Multiplicity="0..1" />
+    <End Type="QLdienthoaiModel.Sanpham" Role="Sanpham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hangsanxuat">
+        <PropertyRef Name="Mahang" />
+      </Principal>
+      <Dependent Role="Sanpham">
+        <PropertyRef Name="Mahang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sanpham_Hedieuhanh">
+    <End Type="QLdienthoaiModel.Hedieuhanh" Role="Hedieuhanh" Multiplicity="0..1" />
+    <End Type="QLdienthoaiModel.Sanpham" Role="Sanpham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hedieuhanh">
+        <PropertyRef Name="Mahdh" />
+      </Principal>
+      <Dependent Role="Sanpham">
+        <PropertyRef Name="Mahdh" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Posts" Relationship="QLdienthoaiModel.FK__Post__CategoryId__1B29035F" FromRole="Category" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="PostTagMap">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PostId" Type="Int32" />
+    <Property Name="TagId" Type="Int32" />
+    <NavigationProperty Name="Tag" Relationship="QLdienthoaiModel.FK__PostTagMa__TagId__20E1DCB5" FromRole="PostTagMap" ToRole="Tag" />
+    <NavigationProperty Name="Post" Relationship="QLdienthoaiModel.FK__PostTagMa__PostI__1FEDB87C" FromRole="PostTagMap" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Url" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PostTagMaps" Relationship="QLdienthoaiModel.FK__PostTagMa__TagId__20E1DCB5" FromRole="Tag" ToRole="PostTagMap" />
+  </EntityType>
+  <Association Name="FK__PostTagMa__TagId__20E1DCB5">
+    <End Type="QLdienthoaiModel.Tag" Role="Tag" Multiplicity="0..1" />
+    <End Type="QLdienthoaiModel.PostTagMap" Role="PostTagMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostTagMap">
+        <PropertyRef Name="TagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ShortDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PostContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Anh" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Published" Type="Boolean" Nullable="false" />
+    <Property Name="Posted_on" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Url" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Mota" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="QLdienthoaiModel.FK__Post__CategoryId__1B29035F" FromRole="Post" ToRole="Category" />
+    <NavigationProperty Name="PostTagMaps" Relationship="QLdienthoaiModel.FK__PostTagMa__PostI__1FEDB87C" FromRole="Post" ToRole="PostTagMap" />
+  </EntityType>
+  <Association Name="FK__Post__CategoryId__1B29035F">
+    <End Type="QLdienthoaiModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="QLdienthoaiModel.Post" Role="Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PostTagMa__PostI__1FEDB87C">
+    <End Type="QLdienthoaiModel.Post" Role="Post" Multiplicity="0..1" />
+    <End Type="QLdienthoaiModel.PostTagMap" Role="PostTagMap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PostTagMap">
+        <PropertyRef Name="PostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

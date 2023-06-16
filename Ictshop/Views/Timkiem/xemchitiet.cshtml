@@ -1,0 +1,70 @@
+﻿@using Ictshop.Models
+@model Sanpham
+
+
+@{
+    ViewBag.Title = "xemchitiet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<style>
+    .left3 img {
+        height: 500px;
+        width: 500px;
+    }
+
+    input {
+        padding: 10px 20px;
+        background-color: aliceblue;
+        color: red;
+        border: 1px solid red;
+        font-size: 20px
+    }
+
+    .left3 {
+        width: 40%;
+        padding-top: 50px;
+        float: left;
+    }
+
+    .right3 {
+        width: 60%;
+        margin-left: 600px;
+        padding-top: 10px;
+    }
+
+        .right3 img {
+            width: 550px;
+        }
+</style>
+<br />
+<div>
+    <img class="img-responsive" src="~/HinhanhSP/ban1.jpg" />
+</div>
+<div class="left3">
+    <img src="@Url.Content("~/HinhanhSP/" +@Model.Anhbia)" width="400" height="400" />
+</div>
+<div class="right3">
+    <br />
+    <h3> @Model.Tensp</h3>
+    <img src="~/HinhanhSP/chitiet.PNG" />
+    <h3 style="color:red">Giá: @Model.Giatien</h3>
+    <br />
+    <table style="width:100%;font-size:20px">
+        <tr>
+            <td style="color: chocolate">Mã Giảm Giá<br />Của Shop</td>
+            <td style="padding-left:20px;color:red"><p style="border: 1px solid red;width:100px">Giảm 50%</p></td>
+        </tr>
+        <tr style="width:300px">
+            <td style="color:chocolate">Bảo Hiểm</td>
+            <td style="padding-left: 20px">Bảo vệ thiết bị nâng cao<p><a href="https://insurance.shopee.vn/ec/ec-pdp.html?from=pdp&product_id=1650882748039999001">Tìm hiểu thêm</a></p></td>
+        </tr>
+    </table>
+    @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMasp = Model.Masp, @strURL = Request.Url.ToString() }))
+    {
+        <input type="submit" value="Thêm vào giỏ hàng" id="bgnGioHang" />
+
+    }
+    <h2>Thông tin sản phẩm</h2>
+    <p>@Model.Mota</p>
+</div>

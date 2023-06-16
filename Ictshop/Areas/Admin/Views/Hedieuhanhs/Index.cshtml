@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Ictshop.Models.Hedieuhanh>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .btn-edit {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+    .btn-details {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+    .btn-default {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+</style>
+<h2>Quản lý hệ điều hành</h2>
+
+<p>
+    <button class="btn btn-primary" style="background-color:black"> @Html.ActionLink("Thêm mới hệ điều hành", "Create")</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Mã hệ điều hành
+        </th>
+        <th>
+            Tên hệ điều hành
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Mahdh)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Tenhdh)
+    </td>
+    <td>
+        @Html.ActionLink("Sửa", "Edit", new { id = item.Mahdh }, new { @class = "btn-edit" })
+        @Html.ActionLink("Chi tiết", "Details", new { id = item.Mahdh }, new { @class = "btn-details" }) 
+        @Html.ActionLink("Xoá", "Delete", new { id = item.Mahdh }, new { @class = "btn-delete" })
+    </td>
+</tr>
+}
+
+</table>

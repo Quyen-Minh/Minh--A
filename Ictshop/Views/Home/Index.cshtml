@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Ictshop.Models.Sanpham>
+@{
+    ViewBag.Title = "homeIndex";
+
+}
+<style>
+    .col-md-3 img {
+        height: 270px;
+    }
+</style>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-8">
+        @Html.Action("SlidePartial", "Home")
+    </div>
+    <div class="col-md-4">
+        <img src="~/HinhanhSP/qc3.gif" class="img-responsive" alt="" />
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
+<div>
+    <img class="img-responsive" src="~/HinhanhSP/ban1.jpg" />
+</div>
+<br />
+<div class="spnoibat">
+    <div class="row">
+
+        <h3> SẢN PHẨM NỔI BẬT</h3>
+        <div class="col-md-4">
+            <img src="~/HinhanhSP/spnb1.png" class="img-responsive" alt="" />
+        </div>
+        <div class="col-md-4">
+            <img src="~/HinhanhSP/spnb2.png" class="img-responsive" alt="" />
+        </div>
+        <div class="col-md-4">
+            <img src="~/HinhanhSP/spnb3.png" class="img-responsive" alt="" />
+        </div>
+    </div>
+</div>
+<div class="dt">
+
+    @Html.Action("dtiphonePartial", "Sanpham")
+</div>
+<div class="dt">
+
+    @Html.Action("dtsamsungpartial", "Sanpham")
+</div>
+<div class="laptop">
+
+    @Html.Action("laptophppartial", "Sanpham")
+</div>
+<div class="laptop">
+
+    @Html.Action("laptopdellppartial", "Sanpham")
+</div>
+<div class="tivi">
+
+    @Html.Action("tivisspartial", "Tivi")
+</div>
+<div class="tivi">
+
+    @Html.Action("tivisonypartial", "Tivi")
+</div>
+<div class="tulanh">
+
+    @Html.Action("tulanhsspartial", "Tulanh")
+</div>
+<div class="tulanh">
+
+    @Html.Action("tulanhlgpartial", "Tulanh")
+</div>
+<div class="phukien">
+
+    @Html.Action("phukienpartial", "Phukien")
+</div>
+<div class="row">
+    <h2> Tin tức sản phẩm</h2>
+    <div class="col-md-8">
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+

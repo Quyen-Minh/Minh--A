@@ -1,0 +1,50 @@
+﻿@model Ictshop.Areas.Admin.Models.DonhangViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Mã đơn</th>
+        <td>@Html.DisplayFor(model => model.Donhang.Madon)</td>
+    </tr>
+    <tr>
+        <th>Mã Sản Phẩm</th>
+        <td>@Html.DisplayFor(model => model.Chitietdonhang.Masp)</td>
+    </tr>
+    <tr>
+        <th>Số lượng</th>
+        <td>@Html.DisplayFor(model => model.Chitietdonhang.Soluong)</td>
+    </tr>
+    <tr>
+        <th>Đơn giá</th>
+        <td>@Html.DisplayFor(model => model.Chitietdonhang.Dongia)</td>
+    </tr>
+    <tr>
+        <th>Họ tên người mua</th>
+        <td>@Html.DisplayFor(model => model.Donhang.HoTen)</td>
+    </tr>
+    <tr>
+        <th>Địa chỉ</th>
+        <td>@Html.DisplayFor(model => model.Donhang.DiaChi)</td>
+    </tr>
+    <tr>
+        <th>Số điện thoại</th>
+        <td>@Html.DisplayFor(model => model.Donhang.SoDienThoai)</td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td>@Html.DisplayFor(model => model.Donhang.Email)</td>
+    </tr>
+</table>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.btn-delete').click(function () {
+                return confirm('Bạn có chắc chắn muốn xoá?');
+            });
+        });
+    </script>
+}

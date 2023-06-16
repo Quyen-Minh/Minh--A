@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="Qlbanhang-Web.config Connection String" description="Qlbanhang Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.Qlbanhang.csdl|res://*/Models.Qlbanhang.ssdl|res://*/Models.Qlbanhang.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=ADMIN\MINHQNSERVER;initial catalog=QLdienthoai;user id=sa;password=sa;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Downloads\\Website\ ban\ hang\ dien\ tu\ MVC\\Website\ ban\ hang\ MVC\\Ictshop\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Qlbanhang']/@connectionString" />
+  </parameter>
+</parameters>

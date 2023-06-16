@@ -1,0 +1,136 @@
+﻿
+@using Ictshop.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Post>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .btn-edit {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        width: 50px;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+    .btn-details {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        width: 50px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        text-align: center;
+        width: 50px;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+</style>
+<h2>Đăng bài giới thiệu- quảng cáo</h2>
+
+<p>
+    <button class="btn btn-primary" style="background-color:black"> @Html.ActionLink("Thêm mới", "Create")</button>
+</p>
+<div class="row">
+    <div class="col-9">
+        @using (Html.BeginForm("Index", "Posts"))
+        {
+            <div class="form-inline" style="float:left">
+                @*<input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm sản phẩm..." aria-label="Search">*@
+                @Html.TextBox("Searchtext", "", new { @class = "form-control", placeholder = "Tìm kiếm sản phẩm..." })
+                <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-default" />
+            </div>
+        }
+    </div>
+</div>
+<table class="table table-bordered">
+    <tr>
+
+        <th>
+            Tên bài viết
+        </th>
+        <th>
+            ShortDescription
+        </th>
+        <th>
+            Postcontent
+        </th>
+        <th>
+            Image
+        </th>
+        <th>
+            Url
+        </th>
+        <th>
+            PostedOn
+        </th>
+
+        <th>
+            Modified
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostContent)
+            </td>
+            <td>
+                <img src="@Url.Content("~/HinhanhSP/" +item.Anh)" width="50" height="50" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Posted_on)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modified)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryId)
+
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn-edit" })
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }, new { @class = "btn-details" })
+                @Html.ActionLink("Xoá", "Delete", new { id = item.Id }, new { @class = "btn-delete" })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+ Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page }))

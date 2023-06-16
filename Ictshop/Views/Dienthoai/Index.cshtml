@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<br />
+<style>
+    #pk1 {
+        text-align: center; /* căn giữa tiêu đề */
+        color: black;
+    }
+
+    .row ul {
+        list-style: none; /* ẩn dấu chấm đầu dòng của danh sách */
+        padding: 0; /* xóa khoảng cách đệm */
+        display: flex; /* chuyển danh sách sang kiểu dạng flexbox */
+        justify-content: space-around; /* canh giữa các phần tử */
+        border-radius: 10px; /* bo tròn các góc của danh sách */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* tạo đổ bóng cho danh sách */
+
+        background-color: cornflowerblue;
+    }
+
+        .row ul li {
+            padding: 10px; /* tạo khoảng cách giữa các phần tử */
+            transition: all 0.2s ease-in-out; /* thêm hiệu ứng chuyển động */
+            font-size: 23px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+            .row ul li a {
+                color: black;
+            }
+
+            .row ul li:hover a {
+                color: red; /* thêm hiệu ứng khi di chuột qua các phần tử */
+                text-decoration: none;
+            }
+</style>
+<div>
+    <img class="img-responsive" src="~/HinhanhSP/ban1.jpg" />
+</div>
+<div><img class="img-responsive" src="~/HinhanhSP/bannerdt.PNG" /></div>
+<br />
+<div class="spnoibat">
+    <div class="row">
+        <h3> SẢN PHẨM NỔI BẬT</h3>
+        <<div class="col-md-4">
+            <img src="~/HinhanhSP/spnb1.png" class="img-responsive" alt="" />
+        </div>
+        <div class="col-md-4">
+            <img src="~/HinhanhSP/spnb2.png" class="img-responsive" alt="" />
+        </div>
+        <div class="col-md-4">
+            <img src="~/HinhanhSP/spnb3.png" class="img-responsive" alt="" />
+        </div>
+        <h3 id="pk1">DANH MỤC HÃNG ĐIỆN THOẠI</h3>
+        <ul>
+            <li class="dienthoai fa-light"><a>SAM SUNG</a></li>
+            <li class="laptop"><a>IPHONE</a></li>
+            <li class="tivi"><a>LG</a></li>
+            <li class="tulanh"><a>XIAOMI</a></li>
+        </ul>
+    </div>
+</div>
+<div class="pkdt">
+    @Html.Action("dtsamsungpartial", "Dienthoai")
+</div>
+<div class="pklt">
+    @Html.Action("dtiphonepartial", "Dienthoai")
+</div>
+<div class="pktv">
+    @Html.Action("dtoppopartial", "Dienthoai")
+</div>
+<div class="pktl">
+    @Html.Action("dtxiaomipartial", "Dienthoai")
+</div>
+<div class="row">
+    <h2> Tin tức sản phẩm</h2>
+    <div class="col-md-8">
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+@section script{
+    <script>var pkdienthoai = document.querySelector('.pkdt');
+        var pklaptop = document.querySelector('.pklt');
+        var pktivi = document.querySelector('.pktv');
+        var pktulanh = document.querySelector('.pktl');
+
+        // lấy phần tử li chứa danh mục điện thoại
+        var dienthoai = document.querySelector('.dienthoai');
+        dienthoai.addEventListener('click', function () {
+            // ẩn các phần tử khác
+            pklaptop.style.display = 'none';
+            pktivi.style.display = 'none';
+            pktulanh.style.display = 'none';
+
+            // hiển thị phần tử chứa phụ kiện điện thoại
+            pkdienthoai.style.display = 'block';
+        });
+
+        var laptop = document.querySelector('.laptop');
+        laptop.addEventListener('click', function () {
+            // ẩn các phần tử khác
+            pkdienthoai.style.display = 'none';
+            pktivi.style.display = 'none';
+            pktulanh.style.display = 'none';
+
+            // hiển thị phần tử chứa phụ kiện laptop
+            pklaptop.style.display = 'block';
+        });
+
+        var tivi = document.querySelector('.tivi');
+        tivi.addEventListener('click', function () {
+            // ẩn các phần tử khác
+            pkdienthoai.style.display = 'none';
+            pklaptop.style.display = 'none';
+            pktulanh.style.display = 'none';
+            // hiển thị phần tử chứa phụ kiện tivi
+            pktivi.style.display = 'block';
+        });
+
+        var tulanh = document.querySelector('.tulanh');
+        tulanh.addEventListener('click', function () {
+            // ẩn các phần tử khác
+            pkdienthoai.style.display = 'none';
+            pklaptop.style.display = 'none';
+            pktivi.style.display = 'none';
+            // hiển thị phần tử chứa phụ kiện tủ lạnh
+            pktulanh.style.display = 'block';
+        });</script>
+}

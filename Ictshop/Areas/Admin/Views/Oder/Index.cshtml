@@ -1,0 +1,98 @@
+﻿@*@model PagedList.IPagedList<Chitietdonhang>*@
+@using PagedList.Mvc;
+@using Ictshop.Areas.Admin.Models
+@model PagedList.IPagedList<Ictshop.Areas.Admin.Models.DonhangViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .btn-details {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+</style>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            Trạng thái
+        </th>
+        <th>
+            Mã đơn
+        </th>
+        <th>
+            Mã SP
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Đơn giá
+        </th>
+        <th>
+            Họ tên người mua
+        </th>
+        <th>
+            Email
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <input type="checkbox" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chitietdonhang.Madon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chitietdonhang.Masp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chitietdonhang.Soluong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Chitietdonhang.Dongia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Donhang.HoTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Donhang.Email)
+            </td>
+
+            <td>
+                @Html.ActionLink("Chi tiết", "details", new { id = item.Donhang.Madon }, new { @class = "btn-details" })
+                @Html.ActionLink("Xoá", "Delete", new { Madon = item.Donhang.Madon, Masp = item.Chitietdonhang.Masp }, new { @class = "btn-delete", onclick = "return confirm('Bạn có chắc chắn muốn xoá?');" })
+
+            </td>
+        </tr>
+    }
+</table>
+<br />
+ Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page }))

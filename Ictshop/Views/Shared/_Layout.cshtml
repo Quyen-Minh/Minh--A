@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Điển Tử</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel=" stylesheet" href="~/Content/Style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @using Ictshop.Models
+
+    <style type="text/css">
+        body {
+            background-color: #F0F0F0;
+            width:100%;
+        }
+        .navbar-header{
+            width:100%;
+        }
+        .navbar-inverse {
+            background-color: #ee4313;
+            border-color: #ff0000;
+        }
+        .form-inline {
+            float: right;
+            padding-top: 10px;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: white;
+            font-size: x-large;
+            
+        }
+
+        .navbar-inverse .navbar-brand {
+            color: white;
+            font-size: 30px;
+            font-family:'Times New Roman';
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: white;
+            font-size: large;
+        }
+
+            .navbar-inverse .navbar-nav > li > a:hover {
+                background-color:black;
+            }
+
+        .navbar-brand {
+            color: cadetblue;
+        }
+
+        .spnoibat {
+            background-color: white;
+        }
+
+        .spnoibat h3 {
+            padding-left: 30px;
+        }
+
+        .giohang {
+            color: white;
+        }
+        ul li ul {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 250px;
+            background-color: #fff;
+            padding: 0;
+            margin: 0;
+            border: 1px solid #ccc;
+            border-top: none;
+            padding: 7px;
+        }
+
+        ul li:hover ul {
+            display: block; 
+        }
+
+        ul li ul li {
+            display: block;
+            color: black;
+            width: 100%;
+            padding:13px 5px;
+            font-size: 20px;
+            font-family: 'Quicksand', sans-serif;
+        }
+        ul li ul li:hover a {
+            background-color: khaki;
+            text-decoration: none;
+        }
+        ul li ul li:hover {
+            background-color: khaki;
+            text-decoration:none;    
+        }
+        .cumgio{
+            display:flex;
+            margin-left:70px;
+            padding-top:15px;
+        }
+        .gio{
+            padding-right:30px;
+        }
+        .tk {
+            padding-right: 40px;
+        }
+        .tk a:hover{
+            text-decoration:none;
+        }
+        .phantrengd{
+            display:flex;
+            align-items:center;
+            width:100%;
+            justify-content:space-around;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+
+    @{
+        var u = Session["use"] as Ictshop.Models.Nguoidung;
+    }
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="top_header col-md-12">
+
+            <div class="row">
+                @*<div class="col-sm-2"><img class="navbar-brand" src="~/HinhanhSP/logo1.jpg" width="20" height="20" style="padding:0" /></div>*@
+
+                @*@Html.Action("GioHangPartial", "GioHang",new { @style = "color:while" })*@
+
+            </div>
+
+        </div>
+        <div class="container">
+
+            <div class="navbar-header">
+                <div class="phantrengd">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div>
+                        <img class="navbar-brand" src="~/HinhanhSP/ban3.PNG" width="100" height="100" style="padding:0" />
+                        @Html.ActionLink("ĐỨC THỌ MOBIE", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    
+                    @*<form name="Timkiem">*@
+                    @using (Html.BeginForm("laysearch", "Timkiem"))
+                    {
+                        <div class="form-inline" style="float:left">
+                            @*<input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm sản phẩm..." aria-label="Search">*@
+                            @Html.TextBox("SearchString", "", new { @class = "form-control", placeholder = "Tìm kiếm sản phẩm..." })
+                            <input type="submit" name="submit" value="Tìm kiếm" class="btn btn-default" />
+                        </div>
+                    }
+                    <div class="cumgio">
+                        <div class="gio">
+                            @Html.Action("GioHangPartial", "GioHang", new { @class = "giohang" })
+                            
+                        </div>
+                        @{
+                            if (u != null)
+                            {
+                                <div class="xuat">
+                                    Xin chào :@u.Email
+                                    &nbsp;
+                                    @*@Html.ActionLink("ĐĂNG XUẤT", "DangXuat", "User", new { style = "color:red" })*@
+                                    <a style="color:black" href="/User/DangXuat"> ĐĂNG XUẤT</a>
+                                </div>
+                            }
+                            else
+                            {
+                            <div class="tk">
+                                <a style="color: white; font-size: 20px" href="/User/Dangky"> Đăng ký</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <a style="color: white; font-size: 20px" href="/User/Dangnhap"> Đăng nhập</a>
+                            </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="navbar-collapse collapse ">
+
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/Dienthoai/Index" title="dienthoai">
+                                @*<span><i class=" glyphicon-music "></i></span>*@
+                                <span>ĐIỆN THOẠI</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Laptop/Index" title="LAPTOP">
+                                @*<span><i class="fas fa-tablet"></i></span>*@
+                                <span>LAPTOP</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Tivi/Index" title="TIVI">
+                                @*<span><i class="fas fa-tablet"></i></span>*@
+                                <span>TI VI</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Tulanh/Index" title="TULANH">
+                                @*<span><i class="fas fa-tablet"></i></span>*@
+                                <span>TỦ LẠNH</span>
+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Phukien/Index" title="PHUKIEN">
+                                @*<span><i class="fas fa-desktop"></i></span>*@
+                                <span>PHỤ KIỆN</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="~/Thongtin/Index" title="THONGTIN">
+                                @*<span><i class=" glyphicon-music "></i></span>*@
+                                <span>THÔNG TIN</span>
+                                <ul>
+                                    <li><a href="~/Thongtin/spbanchay">Sản phẩm bán chạy</a></li>
+                                    <li><a href="~/Thongtin/spmoiramat">Sản phẩm mới ra mắt</a></li>
+                                    <li><a href="~/Thongtin/spsapramat">Sản phẩm sắp ra mắt</a></li>
+                                </ul>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Home/Contact" title="LIENHE">
+                                @*<span><i class="fas fa-headphones"></i></span>*@
+                                <span>LIÊN HỆ</span>
+
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <br>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <div>
+            <img class="img-responsive" src="~/HinhanhSP/ban2.jpg" />
+        </div>
+        <br />
+    </div>
+    <footer class="bg-info" style="padding-left:50px">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <h3>CHĂM SÓC KHÁCH HÀNG</h3>
+                <span>Trung Tâm Trợ Giúp</span>
+                <br />
+                <span>Hướng Dẫn Mua Hàng</span>
+                <br />
+                <span>Thanh Toán</span>
+                <br />
+                <span>Vận chuyển</span>
+                <br />
+                <span>Trả Hàng & Hoàn Tiền</span>
+                <br />
+                <span>Chăm Sóc Khách Hàng</span>
+                <br />
+                <span>Chăm Sóc Bảo Hành</span>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h3>VỀ SHOP ĐIỆN TỬ</h3>
+                <span>Giới Thiệu</span>
+                <br />
+                <span>Tuyển Dụng</span>
+                <br />
+                <span>Điều Khoản</span>
+                <br />
+                <span>Chính Sách Bảo Mật</span>
+                <br />
+                <span>Chính Hãng</span>
+                <br />
+                <span>Liên Hệ Với Truyền Thông</span>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h3>THANH TOÁN</h3>
+                <span>
+                    <img width="300" height="150" src="~/HinhanhSP/Capture2.PNG" />
+                </span>
+                @*<br />
+                    <span>Liên hệ</span>
+                    <br />
+                    <span>Góp ý</span>
+                    <br />
+                    <span>Tra cứu</span>*@
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h3>THEO DÕI CHÚNG TÔI TRÊN</h3>
+                <span><i class="fa-brands fa-facebook"></i>  Facebook</span>
+                <br />
+                <span><i class="fa-brands fa-instagram"></i>  Instagram</span>
+                <br />
+                <span><i class="fa-brands fa-youtube"></i>  Youtube</span>
+                <br />
+                <span><i class="fa-brands fa-tiktok"></i>  Tiktok</span>
+            </div>
+        </div>
+        <hr />
+        <center> <p class="bg-primary">&copy; @DateTime.Now.Year - Quyền Ngọc Minh</p></center>
+    </footer>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @RenderSection("script", required: false)
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿@using Ictshop.Models;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<Sanpham>
+
+@{
+    ViewBag.Title = "Tìm kiếm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<br />
+<br />
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6">
+            <a href="@Url.Action("xemchitiet", new {@Masp=item.Masp })">
+                <img src=@Url.Content("~/HinhanhSP/"+item.Anhbia) class="img-responsive" alt="" width="400" height="400" />
+            </a>
+            <center>
+                <h3>@item.Tensp</h3>
+                <h3 style="color:red">Giá: @item.Giatien</h3>
+                <br />
+                <p style="float:left">@item.Xuatxu</p>
+                @*@using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMasp = item.Masp, @strURL = Request.Url.ToString() }))
+        {
+            <input type="submit" value="Mua hàng" id="bgnGioHang" />
+
+        }*@
+                @*<a href="@Url.Action("xemchitiet", new {@Masp=item.Masp })">Xem chi tiết</a>*@
+            </center>
+
+        </div>
+    }
+  
+</div>
+<div class="dlink">
+    Trang @(Model.PageCount<Model.PageNumber ? 0 :Model.PageNumber)/@Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("search", new {page=page, @SearchString = ViewBag.Tukhoa }))
+</div>
